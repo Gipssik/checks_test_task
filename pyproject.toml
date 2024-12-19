@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "checks-test-task"
+version = "0.1.0"
+description = ""
+authors = ["Dmytro Hissa <d_hissa-itssv@kw.com>"]
+readme = "README.md"
+packages = [{include = "checks_test_task"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.6"
+fastapi-filter = "^2.0.1"
+fastapi-pagination = "^0.12.32"
+sqlalchemy = "^2.0.36"
+greenlet = "^3.1.1"
+asyncpg = "^0.30.0"
+redis = {extras = ["hiredis"], version = "^5.2.1"}
+pydantic-settings = "^2.7.0"
+alembic = "^1.14.0"
+pyjwt = "^2.10.1"
+passlib = "^1.7.4"
+uvicorn = "^0.34.0"
+gunicorn = "^23.0.0"
+uvloop = "^0.21.0"
+python-multipart = "^0.0.20"
+bcrypt = "^4.2.1"
+email-validator = "^2.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
