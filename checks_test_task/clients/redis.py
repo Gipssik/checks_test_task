@@ -1,6 +1,6 @@
 from redis.asyncio import Redis
 
-from checks_test_task.conf.settings import settings, Env
+from checks_test_task.conf.settings import settings, Env, Settings
 from checks_test_task.exceptions import SetupException
 from checks_test_task.tests.redis_mock import AsyncRedisMock
 
@@ -22,8 +22,8 @@ class RedisClient:
             raise SetupException("Redis client not configured")
         return self._client
 
-    async def configure(self) -> None:
-        if settings.ENV == Env.TESTING:
+    async def configure(self, app_settings: Settings = settings) -> None:
+        if app_settings.ENV == Env.TESTING:
             self._client = AsyncRedisMock({})
             return
 

@@ -6,6 +6,7 @@ from pydantic import BaseModel, ConfigDict, PlainSerializer
 from checks_test_task.conf.constants import PaymentType
 
 
+# Decimal is serialized as string by default, it makes it float
 FloatDecimal = Annotated[Decimal, PlainSerializer(lambda x: float(x), return_type=float, when_used="json")]
 
 

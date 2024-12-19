@@ -21,7 +21,7 @@ router = APIRouter()
 @router.post(
     "",
     summary="Create a new check",
-    status_code=HTTPStatus.OK,
+    status_code=HTTPStatus.CREATED,
     response_model=CheckGetSchema,
 )
 async def create_check(

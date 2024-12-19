@@ -23,6 +23,7 @@ class PaymentType(str, Enum):
 
 class ErrorMessages(AutoEnum):
     USER_NOT_AUTHORIZED = auto()
+    INVALID_CREDENTIALS = auto()
     USER_ALREADY_EXISTS = auto()
     CHECK_AMOUNT_EXCEEDED = auto()
     CHECK_DOES_NOT_EXIST = auto()

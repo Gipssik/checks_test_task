@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 from fastapi_pagination import add_pagination
+from sqlalchemy.ext.asyncio import create_async_engine
 
 from checks_test_task import __version__
 from checks_test_task.api import users, checks
 from checks_test_task.clients.redis import redis_client
-from checks_test_task.conf.database import async_session, engine
+from checks_test_task.conf.database import async_session
 from checks_test_task.conf.settings import Settings, settings
 from checks_test_task.exception_handlers import init_exception_handlers
 from checks_test_task.middlewares import init_middlewares
@@ -17,15 +18,16 @@ def init_routes(app: FastAPI) -> None:
     app.include_router(checks.router, prefix="/checks", tags=["checks"])
 
 
-def init_db():
+def init_db(app_settings: Settings) -> None:
     """Init database"""
+    engine = create_async_engine(app_settings.sqlalchemy_database_uri)
     async_session.configure(bind=engine)
     metadata.bind = engine
 
 
 def create_app(app_settings: Settings = settings):
     """Create app with including configurations"""
-    init_db()
+    init_db(app_settings)
     app = FastAPI(
         title="Checks Test Task",
         version=__version__,

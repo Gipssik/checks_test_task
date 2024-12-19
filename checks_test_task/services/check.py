@@ -41,7 +41,9 @@ class CheckService(BaseService[Check]):
     async def get_checks(self, check_filter: CheckFilter, user_id: int):
         """Get all checks for a user applying the filter and pagination"""
 
-        query = check_filter.filter(select(self.MODEL).join(Payment).where(self.MODEL.user_id == user_id))
+        query = check_filter.filter(
+            select(self.MODEL).join(Payment).where(self.MODEL.user_id == user_id).order_by(self.MODEL.id)
+        )
         return await paginate(self.session, query)
 
     async def get_check(self, check_id: int):
